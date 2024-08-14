@@ -3,12 +3,16 @@ import multer from 'multer';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { getRoast } from './roast.js';
+import cors from 'cors'; // Import cors
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
 const upload = multer({ dest: '/tmp/uploads/', limits: { fileSize: 6 * 1024 * 1024 } }); // Changed to use temporary directory and set file size limit to 6MB
+
+// Use CORS middleware
+app.use(cors());
 
 app.use(express.static(path.join(__dirname, 'public'))); // Added to serve static files
 
